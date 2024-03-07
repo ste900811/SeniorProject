@@ -12,8 +12,8 @@
   <h2>{{ result[0] }}</h2>
   
   Sex:
-    <input type="radio" name="Sex" id="Male"><label for="Male">Male</label>
-    <input type="radio" name="Sex" id="Female" checked="checked"><label for="Female">Female</label>
+    <input type="radio" name="Sex" id="Male" value="1"><label for="Male">Male</label>
+    <input type="radio" name="Sex" id="Female" value="2" checked="checked"><label for="Female">Female</label>
     &emsp;&emsp;
   Age:
     <input type="number" name="age" id="age" min="0" max="100" value="50">
@@ -73,6 +73,17 @@
     <input type="radio" name="isActive" id="No"><label for="No" checked="checked">No</label>
     &emsp;&emsp;
 
+  <br><br>
+
   <button onclick="Prediction()">Predict</button>
 </body>
+
+<script>
+  function Prediction() {
+    let Sex = parseInt(document.querySelector('input[type="radio"][name="Sex"]:checked').value);
+    console.log("Sex: " + Sex + " " + typeof Sex)
+    let Age = parseInt(document.getElementById("age").value);
+    console.log("Age: " + Age + " " + typeof Age)
+  }
+</script>
 </html>
