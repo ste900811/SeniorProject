@@ -75,7 +75,13 @@
 
   <br><br>
 
-  <button onclick="Prediction()">Predict</button>
+  <form action="/" method="POST">
+    <button type="submit">Display Message</button>
+  </form>
+
+  {% if message %}
+    <h2>{{ message }}</h2>
+  {% endif %}
 </body>
 
 <script>
