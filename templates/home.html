@@ -4,10 +4,75 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Home Page</title>
 </head>
 
 <body>
-  <h1>Homasdfe</h1>
+  <h1>Hello World! This is just a demo!</h1>
+  <h2>{{ result[0] }}</h2>
+  
+  Sex:
+    <input type="radio" name="Sex" id="Male"><label for="Male">Male</label>
+    <input type="radio" name="Sex" id="Female" checked="checked"><label for="Female">Female</label>
+    &emsp;&emsp;
+  Age:
+    <input type="number" name="age" id="age" min="0" max="100" value="50">
+    &emsp;&emsp;
+  Race:
+    <input type="radio" name="Race" id="MexicanAmerican"><label for="MexicanAmerican" checked="checked">Mexican American</label>
+    <input type="radio" name="Race" id="OtherHispanic"><label for="OtherHispanic">Other Hispanic</label>
+    <input type="radio" name="Race" id="NonHispaniWhite"><label for="NonHispaniWhite">Non-Hispanic White</label>
+    <input type="radio" name="Race" id="NonHispanicBlack"><label for="NonHispanicBlack">Non-Hispanic Black</label>
+    <input type="radio" name="Race" id="Other"><label for="Other">Other</label>
+
+  <br><br>
+
+  Diastolic:
+    <input type="number" name="Diastolic" id="Diastolic" min="0" max="500" value="66.67" step="0.01">
+    &emsp;&emsp;
+  Systolic:
+    <input type="number" name="Systolic" id="Systolic" min="0" max="500" value="104" step="0.01">
+    &emsp;&emsp;
+  Pulse:
+    <input type="number" name="Pulse" id="Pulse" min="0" max="500" value="82" step="0.01">
+    &emsp;&emsp;
+  BMI:
+    <input type="number" name="BMI" id="BMI" min="0" max="500" value="42.6" step="0.01">
+    &emsp;&emsp;
+  HDL:
+    <input type="number" name="HDL" id="HDL" min="0" max="500" value="31">
+    &emsp;&emsp;
+
+  <br><br>
+
+  Trig:
+    <input type="number" name="Trig" id="Trig" min="0" max="500" value="204">
+    &emsp;&emsp;
+  LDL:
+    <input type="number" name="LDL" id="LDL" min="0" max="500" value="113">
+    &emsp;&emsp;
+  TCHOL:
+    <input type="number" name="TCHOL" id="TCHOL" min="0" max="500" value="185">
+    &emsp;&emsp;
+  kidneys_eGFR:
+    <input type="number" name="kidneys_eGFR" id="kidneys_eGFR" min="0" max="500" value="117.01" step="0.01">
+    &emsp;&emsp;
+
+  <br><br>
+
+  Diabetes:
+    <input type="radio" name="Diabetes" id="Yes"><label for="Yes">Yes</label>
+    <input type="radio" name="Diabetes" id="No"><label for="No" checked="checked">No</label>
+    &emsp;&emsp;
+  CurrentSmoker:
+    <input type="radio" name="CurrentSmoker" id="Yes"><label for="Yes">Yes</label>
+    <input type="radio" name="CurrentSmoker" id="No"><label for="No" checked="checked">No</label>
+    &emsp;&emsp;
+  isActive:
+    <input type="radio" name="isActive" id="Yes"><label for="Yes">Yes</label>
+    <input type="radio" name="isActive" id="No"><label for="No" checked="checked">No</label>
+    &emsp;&emsp;
+
+  <button onclick="Prediction()">Predict</button>
 </body>
 </html>

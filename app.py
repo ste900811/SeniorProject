@@ -6,14 +6,13 @@ app = Flask(__name__)
 
 with open("model_pickle.pkl", "rb") as f:
   clf = pickle.load(f)
-data = [[1004,1.41,2,50,1,1,66.66666667,104,82,42.6,31,204,113,185,117.0147731,2,2,2,2]]
-test = pd.DataFrame(data, columns=['ParticipantID', 'Income', 'Sex', 'Age', 'Race', 'Edu', 'Diastolic', 'Systolic', 'Pulse', 'BMI', 'HDL', 'Trig', 'LDL', 'TCHOL', 'kidneys_eGFR', 'Diabetes', 'CurrentSmoker', 'isActive', 'isInsured'])
-finalTest = test.drop(columns=["ParticipantID", "Income", "Edu", "isInsured"])
-result = clf.predict_proba(finalTest)
+data = [[2,50,1,66.66666667,104,82,42.6,31,204,113,185,117.0147731,2,2,2]]
+test = pd.DataFrame(data, columns=['Sex', 'Age', 'Race', 'Diastolic', 'Systolic', 'Pulse', 'BMI', 'HDL', 'Trig', 'LDL', 'TCHOL', 'kidneys_eGFR', 'Diabetes', 'CurrentSmoker', 'isActive'])
+result = clf.predict_proba(test)
 
 @app.route('/')
 def home():
-  return render_template('home.html')
+  return render_template('home.html', result=result)
 
 @app.route('/<name>')
 def user(name):
