@@ -1,0 +1,6 @@
+https://people.cs.pitt.edu/~jlee/note/intro_to_mimic_db.pdf
+https://mit-lcp.github.io/mimic-schema-spy/
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7947548/
+https://opendata.stackexchange.com/questions/6397/is-the-patients-height-available
+https://www.dask.org/
+https://docs.dask.org/en/stable/dataframe.html
