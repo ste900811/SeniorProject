@@ -9,10 +9,6 @@
 
 <body>
   <h1>Hello World! This is just a demo!</h1>
-  {% for item in data %}
-    <h2>{{ item }}</h2>
-  {% endfor %}
-  {{ data["Sex"]}}
   <form action="/" method="POST">
   Sex:
     {% if data["Sex"] == 1 %}
