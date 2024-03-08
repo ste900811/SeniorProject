@@ -16,9 +16,7 @@ columns=['Sex', 'Age', 'Race', 'Diastolic', 'Systolic', 'Pulse', 'BMI', 'HDL', '
 @app.route('/', methods=['GET', 'POST'])
 def home():
   if request.method == 'POST':
-    i = random.randint(0, 100)
     data = dict(request.form)
-    print(data)
     input = [[int(data['Sex']), int(data['Age']), int(data['Race']), float(data['Diastolic']), 
               float(data['Systolic']), float(data['Pulse']), float(data['BMI']), int(data['HDL']), 
               int(data['Trig']), int(data['LDL']), int(data['TCHOL']), float(data['kidneys_eGFR']), 
@@ -26,8 +24,8 @@ def home():
     test = pd.DataFrame(input, columns=columns)
     result = clf.predict_proba(test)
     print(result)
-    return render_template('home.html', result=result[0][0], message=i)
-  return render_template('home.html', result="")
+    return render_template('home.html', result=result[0][0], Sex=int(data['Sex']))
+  return render_template('home.html', result="", Sex=2)
 
 if __name__ == '__main__':
   app.run(debug=True)
