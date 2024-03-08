@@ -9,10 +9,13 @@
 
 <body>
   <h1>Hello World! This is just a demo!</h1>
-  
+  {% for item in data %}
+    <h2>{{ item }}</h2>
+  {% endfor %}
+  {{ data["Sex"]}}
   <form action="/" method="POST">
   Sex:
-    {% if Sex == 1 %}
+    {% if data["Sex"] == 1 %}
     <input type="radio" name="Sex" id="Male" value="1"checked="checked"><label for="Male">Male</label>
     <input type="radio" name="Sex" id="Female" value="2"><label for="Female">Female</label>
     {% else %}

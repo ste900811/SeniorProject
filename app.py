@@ -1,17 +1,17 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, request
 import pickle
 import pandas as pd
-import random
+import json
 
 app = Flask(__name__)
 
 with open("model_pickle.pkl", "rb") as f:
   clf = pickle.load(f)
 columns=['Sex', 'Age', 'Race', 'Diastolic', 'Systolic', 'Pulse', 'BMI', 'HDL', 'Trig', 'LDL', 'TCHOL', 'kidneys_eGFR', 'Diabetes', 'CurrentSmoker', 'isActive']
+startingValue = [2,50,1,66.66666667,104,82,42.6,31,204,113,185,117.0147731,2,2,2]
+startingData = dict(zip(columns, startingValue))
 
-# Sample for input and test
-# data = [[2,50,1,66.66666667,104,82,42.6,31,204,113,185,117.0147731,2,2,2]]
-# test = pd.DataFrame(data, columns=columns)
+testlist = [1,2,3]
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -23,9 +23,12 @@ def home():
               float(data['Diabetes']), int(data['CurrentSmoker']), float(data['isActive'])]]
     test = pd.DataFrame(input, columns=columns)
     result = clf.predict_proba(test)
-    print(result)
-    return render_template('home.html', result=result[0][0], Sex=int(data['Sex']))
-  return render_template('home.html', result="", Sex=2)
+    print(data)
+    print(data['Sex'])
+    return render_template('home.html', result=result[0][0], data=data, li = testlist)
+  print(startingData)
+  print(startingData['Sex'])
+  return render_template('home.html', result="", data=startingData, li = testlist)
 
 if __name__ == '__main__':
   app.run(debug=True)
