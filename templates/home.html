@@ -9,21 +9,21 @@
 
 <body>
   <h1>Hello World! This is just a demo!</h1>
-  <h2>{{ result[0] }}</h2>
   
+  <form action="/" method="POST">
   Sex:
     <input type="radio" name="Sex" id="Male" value="1"><label for="Male">Male</label>
     <input type="radio" name="Sex" id="Female" value="2" checked="checked"><label for="Female">Female</label>
     &emsp;&emsp;
   Age:
-    <input type="number" name="age" id="age" min="0" max="100" value="50">
+    <input type="number" name="Age" id="Age" min="0" max="100" value="50">
     &emsp;&emsp;
   Race:
-    <input type="radio" name="Race" id="MexicanAmerican"><label for="MexicanAmerican" checked="checked">Mexican American</label>
-    <input type="radio" name="Race" id="OtherHispanic"><label for="OtherHispanic">Other Hispanic</label>
-    <input type="radio" name="Race" id="NonHispaniWhite"><label for="NonHispaniWhite">Non-Hispanic White</label>
-    <input type="radio" name="Race" id="NonHispanicBlack"><label for="NonHispanicBlack">Non-Hispanic Black</label>
-    <input type="radio" name="Race" id="Other"><label for="Other">Other</label>
+    <input type="radio" name="Race" id="MexicanAmerican" value="1" checked="checked"><label for="MexicanAmerican">Mexican American</label>
+    <input type="radio" name="Race" id="OtherHispanic" value="2"><label for="OtherHispanic">Other Hispanic</label>
+    <input type="radio" name="Race" id="NonHispaniWhite" value="3"><label for="NonHispaniWhite">Non-Hispanic White</label>
+    <input type="radio" name="Race" id="NonHispanicBlack" value="4"><label for="NonHispanicBlack">Non-Hispanic Black</label>
+    <input type="radio" name="Race" id="Other" value="5"><label for="Other">Other</label>
 
   <br><br>
 
@@ -61,26 +61,25 @@
   <br><br>
 
   Diabetes:
-    <input type="radio" name="Diabetes" id="Yes"><label for="Yes">Yes</label>
-    <input type="radio" name="Diabetes" id="No"><label for="No" checked="checked">No</label>
+    <input type="radio" name="Diabetes" id="Yes" value="1"><label for="Yes">Yes</label>
+    <input type="radio" name="Diabetes" id="No" value="2" checked="checked"><label for="No">No</label>
     &emsp;&emsp;
   CurrentSmoker:
-    <input type="radio" name="CurrentSmoker" id="Yes"><label for="Yes">Yes</label>
-    <input type="radio" name="CurrentSmoker" id="No"><label for="No" checked="checked">No</label>
+    <input type="radio" name="CurrentSmoker" id="Yes" value="1"><label for="Yes">Yes</label>
+    <input type="radio" name="CurrentSmoker" id="No" value="2" checked="checked"><label for="No">No</label>
     &emsp;&emsp;
   isActive:
-    <input type="radio" name="isActive" id="Yes"><label for="Yes">Yes</label>
-    <input type="radio" name="isActive" id="No"><label for="No" checked="checked">No</label>
+    <input type="radio" name="isActive" id="Yes" value="1"><label for="Yes">Yes</label>
+    <input type="radio" name="isActive" id="No" value="2" checked="checked"><label for="No">No</label>
     &emsp;&emsp;
 
   <br><br>
 
-  <form action="/" method="POST">
-    <button type="submit">Display Message</button>
+    <button type="submit">Predict</button>
   </form>
 
-  {% if message %}
-    <h2>{{ message }}</h2>
+  {% if result %}
+    <h2>{{ result }}</h2>
   {% endif %}
 </body>
 

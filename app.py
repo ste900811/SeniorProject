@@ -7,28 +7,27 @@ app = Flask(__name__)
 
 with open("model_pickle.pkl", "rb") as f:
   clf = pickle.load(f)
-data = [[2,50,1,66.66666667,104,82,42.6,31,204,113,185,117.0147731,2,2,2]]
-test = pd.DataFrame(data, columns=['Sex', 'Age', 'Race', 'Diastolic', 'Systolic', 'Pulse', 'BMI', 'HDL', 'Trig', 'LDL', 'TCHOL', 'kidneys_eGFR', 'Diabetes', 'CurrentSmoker', 'isActive'])
-result = clf.predict_proba(test)
+columns=['Sex', 'Age', 'Race', 'Diastolic', 'Systolic', 'Pulse', 'BMI', 'HDL', 'Trig', 'LDL', 'TCHOL', 'kidneys_eGFR', 'Diabetes', 'CurrentSmoker', 'isActive']
+
+# Sample for input and test
+# data = [[2,50,1,66.66666667,104,82,42.6,31,204,113,185,117.0147731,2,2,2]]
+# test = pd.DataFrame(data, columns=columns)
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
   if request.method == 'POST':
     i = random.randint(0, 100)
-    return render_template('home.html', result=result, message=i)
-  return render_template('home.html', result=result)
-
-@app.route('/display_message')
-def display_message():
-  return redirect(url_for('home'), message="Hello, display success!")
-
-@app.route('/<name>')
-def user(name):
-  return f"Hello {name}! {result}"
-
-@app.route('/admin')
-def admin():
-  return redirect(url_for('home'))
+    data = dict(request.form)
+    print(data)
+    input = [[int(data['Sex']), int(data['Age']), int(data['Race']), float(data['Diastolic']), 
+              float(data['Systolic']), float(data['Pulse']), float(data['BMI']), int(data['HDL']), 
+              int(data['Trig']), int(data['LDL']), int(data['TCHOL']), float(data['kidneys_eGFR']), 
+              float(data['Diabetes']), int(data['CurrentSmoker']), float(data['isActive'])]]
+    test = pd.DataFrame(input, columns=columns)
+    result = clf.predict_proba(test)
+    print(result)
+    return render_template('home.html', result=result[0][0], message=i)
+  return render_template('home.html', result="")
 
 if __name__ == '__main__':
   app.run(debug=True)
