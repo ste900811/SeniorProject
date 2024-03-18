@@ -1,9 +1,15 @@
 import pandas as pd
+import dask.dataframe as dd
+from dask.distributed import Client, LocalCluster
+
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width', 0)
 
 # # len(index) = 58976
+# addmissions = dd.read_csv('./mimic-iii-clinical-database-1.4/ADMISSIONS.csv.gz', compression='gzip', blocksize=None)
+# print(addmissions.head(20))
+
 # ADMISSIONS = pd.read_csv('./mimic-iii-clinical-database-1.4/ADMISSIONS.csv.gz', compression='gzip', dtype={'ROW_ID'               : "int64",
 #                                                                                                            'SUBJECT_ID'           : "int64",
 #                                                                                                            'HADM_ID'              : "int64",
@@ -23,7 +29,6 @@ pd.set_option('display.width', 0)
 #                                                                                                            'DIAGNOSIS'            : "string",
 #                                                                                                            'HOSPITAL_EXPIRE_FLAG' : "int64",
 #                                                                                                            'HAS_CHARTEVENTS_DATA' : "int64"})
-
 
 # # len(index) = 34499
 # CALLOUT = pd.read_csv('./mimic-iii-clinical-database-1.4/CALLOUT.csv.gz', compression='gzip', dtype={'ROW_ID'                 : "int64",
@@ -60,6 +65,9 @@ pd.set_option('display.width', 0)
 
 # # len(index) = 100000000 + 100000000 + 100000000 + 30712483 = 330712483
 # row = 100000000
+chart = pd.read_csv('./mimic-iii-clinical-database-1.4/CHARTEVENTS.csv.gz', compression='gzip', usecols=["ROW_ID", "CHARTTIME", "STORETIME"]).astype(str)
+print(chart.head(20))
+
 # CHARTEVENTS0 = pd.read_csv('./mimic-iii-clinical-database-1.4/CHARTEVENTS.csv.gz', compression='gzip', dtype={'ROW_ID'      : "int64",
 #                                                                                                              'SUBJECT_ID'  : "int64",
 #                                                                                                              'HADM_ID'     : "int64",
