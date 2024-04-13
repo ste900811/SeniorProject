@@ -1,34 +1,30 @@
 import pandas as pd
-import dask.dataframe as dd
-from dask.distributed import Client, LocalCluster
 
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width', 0)
 
-# # len(index) = 58976
-# addmissions = dd.read_csv('./mimic-iii-clinical-database-1.4/ADMISSIONS.csv.gz', compression='gzip', blocksize=None)
-# print(addmissions.head(20))
-
-# ADMISSIONS = pd.read_csv('./mimic-iii-clinical-database-1.4/ADMISSIONS.csv.gz', compression='gzip', dtype={'ROW_ID'               : "int64",
-#                                                                                                            'SUBJECT_ID'           : "int64",
-#                                                                                                            'HADM_ID'              : "int64",
-#                                                                                                            'ADMITTIME'            : "string",
-#                                                                                                            'DISCHTIME'            : "string",
-#                                                                                                            'DEATHTIME'            : "string",
-#                                                                                                            'ADMISSION_TYPE'       : "string",
-#                                                                                                            'ADMISSION_LOCATION'   : "string",
-#                                                                                                            'DISCHARGE_LOCATION'   : "string",
-#                                                                                                            'INSURANCE'            : "string",
-#                                                                                                            'LANGUAGE'             : "string",
-#                                                                                                            'RELIGION'             : "string",
-#                                                                                                            'MARITAL_STATUS'       : "string",
-#                                                                                                            'ETHNICITY'            : "string",
-#                                                                                                            'EDREGTIME'            : "string",
-#                                                                                                            'EDOUTTIME'            : "string",
-#                                                                                                            'DIAGNOSIS'            : "string",
-#                                                                                                            'HOSPITAL_EXPIRE_FLAG' : "int64",
-#                                                                                                            'HAS_CHARTEVENTS_DATA' : "int64"})
+# len(index) = 58976
+ADMISSIONS = pd.read_csv('./mimic-iii-clinical-database-1.4/ADMISSIONS.csv.gz', compression='gzip', dtype={'ROW_ID'               : "int64",
+                                                                                                           'SUBJECT_ID'           : "int64",
+                                                                                                           'HADM_ID'              : "int64",
+                                                                                                           'ADMITTIME'            : "string",
+                                                                                                           'DISCHTIME'            : "string",
+                                                                                                           'DEATHTIME'            : "string",
+                                                                                                           'ADMISSION_TYPE'       : "string",
+                                                                                                           'ADMISSION_LOCATION'   : "string",
+                                                                                                           'DISCHARGE_LOCATION'   : "string",
+                                                                                                           'INSURANCE'            : "string",
+                                                                                                           'LANGUAGE'             : "string",
+                                                                                                           'RELIGION'             : "string",
+                                                                                                           'MARITAL_STATUS'       : "string",
+                                                                                                           'ETHNICITY'            : "string",
+                                                                                                           'EDREGTIME'            : "string",
+                                                                                                           'EDOUTTIME'            : "string",
+                                                                                                           'DIAGNOSIS'            : "string",
+                                                                                                           'HOSPITAL_EXPIRE_FLAG' : "int64",
+                                                                                                           'HAS_CHARTEVENTS_DATA' : "int64"})
+print(ADMISSIONS.head(20))
 
 # # len(index) = 34499
 # CALLOUT = pd.read_csv('./mimic-iii-clinical-database-1.4/CALLOUT.csv.gz', compression='gzip', dtype={'ROW_ID'                 : "int64",
@@ -65,8 +61,6 @@ pd.set_option('display.width', 0)
 
 # # len(index) = 100000000 + 100000000 + 100000000 + 30712483 = 330712483
 # row = 100000000
-chart = pd.read_csv('./mimic-iii-clinical-database-1.4/CHARTEVENTS.csv.gz', compression='gzip', usecols=["ROW_ID", "CHARTTIME", "STORETIME"]).astype(str)
-print(chart.head(20))
 
 # CHARTEVENTS0 = pd.read_csv('./mimic-iii-clinical-database-1.4/CHARTEVENTS.csv.gz', compression='gzip', dtype={'ROW_ID'      : "int64",
 #                                                                                                              'SUBJECT_ID'  : "int64",
@@ -84,6 +78,17 @@ print(chart.head(20))
 #                                                                                                             #  'RESULTSTATUS': "float64",
 #                                                                                                             #  'STOPPED'     : "float64"
 #                                                                                                              }, keep_default_na=False, na_filter=False, nrows=row)
+# wCount = 0
+# hCount = 0
+# for row in CHARTEVENTS0.itertuples():
+#   if row.ITEMID in {762, 763, 3723, 3580, 3582} and wCount < 10:
+#     print(row)
+#     wCount += 1
+#   if row.ITEMID in {920, 1394, 4187, 3486, 3485, 4188} and hCount < 10:
+#     print(row)
+#     hCount += 1
+#   if wCount == 10 and hCount == 10:
+#     break
 
 # CHARTEVENTS1 = pd.read_csv('./mimic-iii-clinical-database-1.4/CHARTEVENTS.csv.gz', compression='gzip', dtype={'ROW_ID'      : "int64",
 #                                                                                                              'SUBJECT_ID'  : "int64",
