@@ -5,7 +5,7 @@ import pandas as pd
 app = Flask(__name__)
 
 # Load the model and starting value for the machine learning project 1
-with open("model_pickle.pkl", "rb") as f:
+with open("pickleAml1.pkl", "rb") as f:
   clf = pickle.load(f)
 
 # Columns and starting value for for the machine learning project 1
