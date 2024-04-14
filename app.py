@@ -1,8 +1,14 @@
 from flask import Flask, render_template, request
 import pickle
 import pandas as pd
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.preprocessing import StandardScaler
 
 app = Flask(__name__)
+
+# Senior project initial setup
+
+
 
 # Load the model and starting value for the machine learning project 1
 with open("pickleAml1.pkl", "rb") as f:

@@ -1,7 +1,5 @@
 # This is the main file for set up the kNN model. It will read the data from the diagnosis.csv file and do the feature extraction.
 # If needs the detail explanation of the functions, please refer to the ipynb file.
-
-# Read the dataframe and extraction the feature
 import pandas as pd
 import pickle
 from sklearn.neighbors import KNeighborsClassifier
@@ -9,11 +7,6 @@ from sklearn.preprocessing import StandardScaler
 
 # Read the data
 data = pd.read_csv('../dataProcess/diagnosis.csv')
-
-# Replace the typo in the data
-for index, row in data.iterrows():
-  if row["DIAGNOSIS"] == "CORNARY ARTERY DISEASE":
-    data.at[index, "DIAGNOSIS"] = "CORONARY ARTERY DISEASE"
 
 # Do feature extraction on Diagnosis and Gender
 diagnosisLabelToInt = dict([(d, index) for index, d in enumerate(set(data["DIAGNOSIS"]))])

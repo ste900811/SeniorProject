@@ -2,6 +2,7 @@
 # The ipynb file is used to test the functions in this file step by step, for the detailed explanation of the functions, please refer to the ipynb file.
 
 import pandas as pd
+import pickle
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
@@ -9,6 +10,7 @@ pd.set_option('display.width', 0)
 
 # read ADMISSIONS.csv.gz
 mainDF = pd.read_csv('../mimic-iii-clinical-database-1.4/ADMISSIONS.csv.gz', compression='gzip', usecols=["SUBJECT_ID", "HADM_ID", "ADMITTIME", "DIAGNOSIS"])
+print(f'Finish reading ADMISSIONS.csv.gz')
 
 # Change the ADMITTIME only have date
 mainDF["ADMITTIME"] = pd.to_datetime(mainDF["ADMITTIME"]).dt.date.astype(str)
@@ -34,6 +36,7 @@ for row in mainDF.itertuples():
     data.append([row.SUBJECT_ID, row.HADM_ID, row.ADMITTIME, d])
 
 diagnosisDF = pd.DataFrame(data, columns=["SUBJECT_ID", "HADM_ID", "ADMITTIME", "DIAGNOSIS"])
+print(f'Finish separating the diagnosis')
 
 # read CHARTEVENTS.csv.gz and drop the missing value, and change the CHARTTIME only have date
 CHARTEVENTS = pd.read_csv('../mimic-iii-clinical-database-1.4/CHARTEVENTS.csv.gz', compression='gzip', usecols=["SUBJECT_ID", "HADM_ID", "CHARTTIME", "ITEMID", "VALUE"]).dropna()
@@ -63,6 +66,7 @@ for row in CHARTEVENTS.itertuples():
   elif row.ITEMID == 3485 or row.ITEMID == 4188: # height unit is in cm
     if key in weightHeightDict and weightHeightDict[key][1] == -1: weightHeightDict[key][1] = float(row.VALUE)*0.01
     else: weightHeightDict[key] = [-1, float(row.VALUE)*0.01]
+print(f'Finish creating weightHeightDict')
 
 # filter out if the key only have weight or height
 for key, value in list(weightHeightDict.items()):
@@ -75,6 +79,7 @@ for row in diagnosisDF.itertuples():
     weight, height = weightHeightDict[(row.SUBJECT_ID, row.HADM_ID, row.ADMITTIME)]
     diagnosisDF.at[row.Index, "WEIGHT"] = weight
     diagnosisDF.at[row.Index, "HEIGHT"] = height
+print(f'Finish plugging the weight and height')
 
 # Drop the rows if the weight or height is NaN
 diagnosisDF = diagnosisDF.dropna()
@@ -99,9 +104,15 @@ for row in diagnosisDF.itertuples():
   age, remainder = patientMonth//12, patientMonth%12
   if remainder >= 6: age += 1
   diagnosisDF.at[row.Index, "AGE"] = int(age)
+print(f'Finish plugging the age and gender')
 
 # Drop the SUBJECT_ID, HADM_ID, ADMITTIME, since it is not needed anymore
 diagnosisDF = diagnosisDF.drop(columns=["SUBJECT_ID", "HADM_ID", "ADMITTIME"])
+
+# Replace the typo in the data
+for index, row in data.iterrows():
+  if row["DIAGNOSIS"] == "CORNARY ARTERY DISEASE":
+    data.at[index, "DIAGNOSIS"] = "CORONARY ARTERY DISEASE"
 
 # Save the dataframe to csv
 diagnosisDF.to_csv('diagnosis.csv', index=False)
