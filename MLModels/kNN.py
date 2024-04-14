@@ -3,11 +3,17 @@
 
 # Read the dataframe and extraction the feature
 import pandas as pd
+import pickle
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
 
 # Read the data
 data = pd.read_csv('../dataProcess/diagnosis.csv')
+
+# Replace the typo in the data
+for index, row in data.iterrows():
+  if row["DIAGNOSIS"] == "CORNARY ARTERY DISEASE":
+    data.at[index, "DIAGNOSIS"] = "CORONARY ARTERY DISEASE"
 
 # Do feature extraction on Diagnosis and Gender
 diagnosisLabelToInt = dict([(d, index) for index, d in enumerate(set(data["DIAGNOSIS"]))])
@@ -26,18 +32,19 @@ X = data.drop(["DIAGNOSIS"], axis=1)
 scaler = StandardScaler()
 X = scaler.fit_transform(X.to_numpy())
 
+# Create the prediction data
 result = set()
 neighbors = 5
 predData = scaler.transform([[72.2, 1.8, 0, 75]])
-print(predData)
+print(f'Pred Data: {predData}')
 
-# Train the model
+# while the result is less than input, keep increasing the neighbors
 while len(result) < 5:
   model = KNeighborsClassifier(n_neighbors=neighbors)
   model.fit(X, y)
-  print(model.predict_proba(predData)[0])
   for d, pred in enumerate(model.predict_proba(predData)[0]):
     if pred > 0:
       result.add(diagnosisIntToLabel[d])
+  neighbors += 1
   
 print(result)
