@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Home Page</title>
+</head>
+
+<body>
+  <h1>Hello World! This is just a demo for AML project 1!</h1>
+  <form action="/" method="POST">
+  Sex:
+    {% if data["Sex"] == 1 %}
+    <input type="radio" name="Sex" id="Male" value="1"checked="checked"><label for="Male">Male</label>
+    <input type="radio" name="Sex" id="Female" value="2"><label for="Female">Female</label>
+    {% else %}
+    <input type="radio" name="Sex" id="Male" value="1"><label for="Male">Male</label>
+    <input type="radio" name="Sex" id="Female" value="2" checked="checked"><label for="Female">Female</label>
+    {% endif %}
+    &emsp;&emsp;
+  Age:
+    <input type="number" name="Age" id="Age" min="0" max="100" value="{{data["Age"]}}">
+    &emsp;&emsp;
+  Race:
+    {% if data["Race"] == 1 %}
+    <input type="radio" name="Race" id="MexicanAmerican" value="1" checked="checked"><label for="MexicanAmerican">Mexican American</label>
+    <input type="radio" name="Race" id="OtherHispanic" value="2"><label for="OtherHispanic">Other Hispanic</label>
+    <input type="radio" name="Race" id="NonHispaniWhite" value="3"><label for="NonHispaniWhite">Non-Hispanic White</label>
+    <input type="radio" name="Race" id="NonHispanicBlack" value="4"><label for="NonHispanicBlack">Non-Hispanic Black</label>
+    <input type="radio" name="Race" id="Other" value="5"><label for="Other">Other</label>
+    {% elif data["Race"] == 2 %}
+    <input type="radio" name="Race" id="MexicanAmerican" value="1"><label for="MexicanAmerican">Mexican American</label>
+    <input type="radio" name="Race" id="OtherHispanic" value="2" checked="checked"><label for="OtherHispanic">Other Hispanic</label>
+    <input type="radio" name="Race" id="NonHispaniWhite" value="3"><label for="NonHispaniWhite">Non-Hispanic White</label>
+    <input type="radio" name="Race" id="NonHispanicBlack" value="4"><label for="NonHispanicBlack">Non-Hispanic Black</label>
+    <input type="radio" name="Race" id="Other" value="5"><label for="Other">Other</label>
+    {% elif data["Race"] == 3 %}
+    <input type="radio" name="Race" id="MexicanAmerican" value="1"><label for="MexicanAmerican">Mexican American</label>
+    <input type="radio" name="Race" id="OtherHispanic" value="2"><label for="OtherHispanic">Other Hispanic</label>
+    <input type="radio" name="Race" id="NonHispaniWhite" value="3" checked="checked"><label for="NonHispaniWhite">Non-Hispanic White</label>
+    <input type="radio" name="Race" id="NonHispanicBlack" value="4"><label for="NonHispanicBlack">Non-Hispanic Black</label>
+    <input type="radio" name="Race" id="Other" value="5"><label for="Other">Other</label>
+    {% elif data["Race"] == 4 %}
+    <input type="radio" name="Race" id="MexicanAmerican" value="1"><label for="MexicanAmerican">Mexican American</label>
+    <input type="radio" name="Race" id="OtherHispanic" value="2"><label for="OtherHispanic">Other Hispanic</label>
+    <input type="radio" name="Race" id="NonHispaniWhite" value="3"><label for="NonHispaniWhite">Non-Hispanic White</label>
+    <input type="radio" name="Race" id="NonHispanicBlack" value="4" checked="checked"><label for="NonHispanicBlack">Non-Hispanic Black</label>
+    <input type="radio" name="Race" id="Other" value="5"><label for="Other">Other</label>
+    {% elif data["Race"] == 5 %}
+    <input type="radio" name="Race" id="MexicanAmerican" value="1"><label for="MexicanAmerican">Mexican American</label>
+    <input type="radio" name="Race" id="OtherHispanic" value="2"><label for="OtherHispanic">Other Hispanic</label>
+    <input type="radio" name="Race" id="NonHispaniWhite" value="3"><label for="NonHispaniWhite">Non-Hispanic White</label>
+    <input type="radio" name="Race" id="NonHispanicBlack" value="4"><label for="NonHispanicBlack">Non-Hispanic Black</label>
+    <input type="radio" name="Race" id="Other" value="5" checked="checked"><label for="Other">Other</label>
+    {% endif %}
+
+  <br><br>
+
+  Diastolic:
+    <input type="number" name="Diastolic" id="Diastolic" min="0" max="500" value="{{data["Diastolic"]}}" step="0.01">
+    &emsp;&emsp;
+  Systolic:
+    <input type="number" name="Systolic" id="Systolic" min="0" max="500" value="{{data["Systolic"]}}" step="0.01">
+    &emsp;&emsp;
+  Pulse:
+    <input type="number" name="Pulse" id="Pulse" min="0" max="500" value="{{data["Pulse"]}}" step="0.01">
+    &emsp;&emsp;
+  BMI:
+    <input type="number" name="BMI" id="BMI" min="0" max="500" value="{{data["BMI"]}}" step="0.01">
+    &emsp;&emsp;
+  HDL:
+    <input type="number" name="HDL" id="HDL" min="0" max="500" value="{{data["HDL"]}}">
+    &emsp;&emsp;
+
+  <br><br>
+
+  Trig:
+    <input type="number" name="Trig" id="Trig" min="0" max="500" value="{{data["Trig"]}}">
+    &emsp;&emsp;
+  LDL:
+    <input type="number" name="LDL" id="LDL" min="0" max="500" value="{{data["LDL"]}}">
+    &emsp;&emsp;
+  TCHOL:
+    <input type="number" name="TCHOL" id="TCHOL" min="0" max="500" value="{{data["TCHOL"]}}">
+    &emsp;&emsp;
+  kidneys_eGFR:
+    <input type="number" name="kidneys_eGFR" id="kidneys_eGFR" min="0" max="500" value="{{data["kidneys_eGFR"]}}" step="0.01">
+    &emsp;&emsp;
+
+  <br><br>
+
+  Diabetes:
+    {% if data["Diabetes"] == 1 %}
+    <input type="radio" name="Diabetes" id="Yes" value="1" checked="checked"><label for="Yes">Yes</label>
+    <input type="radio" name="Diabetes" id="No" value="2"><label for="No">No</label>
+    {% elif data["Diabetes"] == 2 %}
+    <input type="radio" name="Diabetes" id="Yes" value="1"><label for="Yes">Yes</label>
+    <input type="radio" name="Diabetes" id="No" value="2" checked="checked"><label for="No">No</label>
+    {% endif %}
+    &emsp;&emsp;
+  CurrentSmoker:
+    {% if data["CurrentSmoker"] == 1 %}
+    <input type="radio" name="CurrentSmoker" id="Yes" value="1" checked="checked"><label for="Yes">Yes</label>
+    <input type="radio" name="CurrentSmoker" id="No" value="2"><label for="No">No</label>
+    {% elif data["CurrentSmoker"] == 2 %}
+    <input type="radio" name="CurrentSmoker" id="Yes" value="1"><label for="Yes">Yes</label>
+    <input type="radio" name="CurrentSmoker" id="No" value="2" checked="checked"><label for="No">No</label>
+    {% endif %}
+    &emsp;&emsp;
+  isActive:
+    {% if data["isActive"] == 1 %}
+    <input type="radio" name="isActive" id="Yes" value="1" checked="checked"><label for="Yes">Yes</label>
+    <input type="radio" name="isActive" id="No" value="2"><label for="No">No</label>
+    {% elif data["isActive"] == 2 %}
+    <input type="radio" name="isActive" id="Yes" value="1"><label for="Yes">Yes</label>
+    <input type="radio" name="isActive" id="No" value="2" checked="checked"><label for="No">No</label>
+    {% endif %}
+    &emsp;&emsp;
+
+  <br><br>
+
+    <button type="submit">Predict</button>
+  </form>
+
+  {% if result %}
+  <h2>{{ result }}</h2>
+  {% endif %}
+
+</body>
+</html>
