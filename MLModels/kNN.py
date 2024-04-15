@@ -14,8 +14,7 @@ with open("../pickleFiles/scaler.pkl", "rb") as f:
   scaler = pickle.load(f)
 
 # Set up the model X and y
-y = data["DIAGNOSIS"]
-X = data.drop(["DIAGNOSIS"], axis=1)
+X, y = data.drop(["DIAGNOSIS"], axis=1), data["DIAGNOSIS"]
 
 # Create the prediction data
 result = set()
