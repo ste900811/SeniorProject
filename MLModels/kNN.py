@@ -8,9 +8,11 @@ from sklearn.preprocessing import StandardScaler
 # Read the data
 data = pd.read_csv('../dataProcess/diagnosis.csv')
 
-# Do feature extraction on Diagnosis and Gender
-diagnosisLabelToInt = dict([(d, index) for index, d in enumerate(set(data["DIAGNOSIS"]))])
-diagnosisIntToLabel = dict([(index, d) for index, d in enumerate(set(data["DIAGNOSIS"]))])
+# Read the dictionary from pickle file
+with open("../pickleFiles/diagnosisLabelToInt.pkl", "rb") as f:
+  diagnosisLabelToInt = pickle.load(f)
+with open("../pickleFiles/diagnosisIntToLabel.pkl", "rb") as f:
+  diagnosisIntToLabel = pickle.load(f)
 genderLabel = {"M": 0, "F": 1}
 
 # Replace the string with the index

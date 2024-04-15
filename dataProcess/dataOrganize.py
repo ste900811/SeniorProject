@@ -41,6 +41,7 @@ print(f'Finish separating the diagnosis')
 # read CHARTEVENTS.csv.gz and drop the missing value, and change the CHARTTIME only have date
 CHARTEVENTS = pd.read_csv('../mimic-iii-clinical-database-1.4/CHARTEVENTS.csv.gz', compression='gzip', usecols=["SUBJECT_ID", "HADM_ID", "CHARTTIME", "ITEMID", "VALUE"]).dropna()
 CHARTEVENTS["CHARTTIME"] = pd.to_datetime(CHARTEVENTS["CHARTTIME"]).dt.date.astype(str)
+print(f'Finish reading CHARTEVENTS.csv.gz')
 
 # create weightHeightDict with key = (SUBJECT_ID, HADM_ID, CHARTTIME) and value = [weight, height]
 weightHeightDict = {}
@@ -110,9 +111,31 @@ print(f'Finish plugging the age and gender')
 diagnosisDF = diagnosisDF.drop(columns=["SUBJECT_ID", "HADM_ID", "ADMITTIME"])
 
 # Replace the typo in the data
-for index, row in data.iterrows():
-  if row["DIAGNOSIS"] == "CORNARY ARTERY DISEASE":
-    data.at[index, "DIAGNOSIS"] = "CORONARY ARTERY DISEASE"
+for index, row in diagnosisDF.iterrows():
+  original = row["DIAGNOSIS"]
+
+  if original == "CORNARY ARTERY DISEASE":
+    original = "CORONARY ARTERY DISEASE"
+    continue
+  elif original == "":
+    diagnosisDF.drop(index, inplace=True)
+    continue
+
+  original = row["DIAGNOSIS"]
+  while original == " " or original == "\"":
+    original = original[1:]
+  while original == " " or original == "\"":
+    original = original[:-1]
+  diagnosisDF.at[index, "DIAGNOSIS"] = original
+
+# Do feature extraction on Diagnosis and Gender, and save it to pickle
+diagnosisLabelToInt = dict([(d, index) for index, d in enumerate(set(diagnosisDF["DIAGNOSIS"]))])
+diagnosisIntToLabel = dict([(index, d) for index, d in enumerate(set(diagnosisDF["DIAGNOSIS"]))])
+with open('../pickleFiles/diagnosisLabelToInt.pkl', 'wb') as f:
+  pickle.dump(diagnosisLabelToInt, f)
+with open('../pickleFiles/diagnosisIntToLabel.pkl', 'wb') as f:
+  pickle.dump(diagnosisIntToLabel, f)
+print(f'Finish saving the diagnosisLabelToInt.pkl and diagnosisIntToLabel.pkl')
 
 # Save the dataframe to csv
 diagnosisDF.to_csv('diagnosis.csv', index=False)
