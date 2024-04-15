@@ -137,5 +137,9 @@ with open('../pickleFiles/diagnosisIntToLabel.pkl', 'wb') as f:
   pickle.dump(diagnosisIntToLabel, f)
 print(f'Finish saving the diagnosisLabelToInt.pkl and diagnosisIntToLabel.pkl')
 
+# Replace the string with the index
+data["DIAGNOSIS"] = [diagnosisLabelToInt[n] for n in data["DIAGNOSIS"]]
+data["GENDER"] = [genderLabel[n] for n in data["GENDER"]]
+
 # Save the dataframe to csv
 diagnosisDF.to_csv('diagnosis.csv', index=False)

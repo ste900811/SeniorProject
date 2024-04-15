@@ -9,15 +9,9 @@ from sklearn.preprocessing import StandardScaler
 data = pd.read_csv('../dataProcess/diagnosis.csv')
 
 # Read the dictionary from pickle file
-with open("../pickleFiles/diagnosisLabelToInt.pkl", "rb") as f:
-  diagnosisLabelToInt = pickle.load(f)
 with open("../pickleFiles/diagnosisIntToLabel.pkl", "rb") as f:
   diagnosisIntToLabel = pickle.load(f)
 genderLabel = {"M": 0, "F": 1}
-
-# Replace the string with the index
-data["DIAGNOSIS"] = [diagnosisLabelToInt[n] for n in data["DIAGNOSIS"]]
-data["GENDER"] = [genderLabel[n] for n in data["GENDER"]]
 
 # Set up the model X and y
 y = data["DIAGNOSIS"]
