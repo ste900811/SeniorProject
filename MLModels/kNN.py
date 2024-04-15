@@ -3,23 +3,19 @@
 import pandas as pd
 import pickle
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.preprocessing import StandardScaler
 
 # Read the data
-data = pd.read_csv('../dataProcess/diagnosis.csv')
+data = pd.read_csv('../dataProcess/diagnosis_final.csv')
 
-# Read the dictionary from pickle file
+# Read the dictionary and scaler from pickle file
 with open("../pickleFiles/diagnosisIntToLabel.pkl", "rb") as f:
   diagnosisIntToLabel = pickle.load(f)
-genderLabel = {"M": 0, "F": 1}
+with open("../pickleFiles/scaler.pkl", "rb") as f:
+  scaler = pickle.load(f)
 
 # Set up the model X and y
 y = data["DIAGNOSIS"]
 X = data.drop(["DIAGNOSIS"], axis=1)
-
-# Standardize the data
-scaler = StandardScaler()
-X = scaler.fit_transform(X.to_numpy())
 
 # Create the prediction data
 result = set()
